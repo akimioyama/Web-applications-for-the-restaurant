@@ -5,13 +5,11 @@
 header {
     min-height: 50px;
     width: 100%;
-    background-color: aqua;
     position: relative;
     font-size: 30px;
 }
 .header {
     width: 60%;
-    background-color: blanchedalmond;
     min-height: 50px;
     position: absolute;
     left: 50%;
@@ -70,6 +68,8 @@ header {
     background-color: rgb(67, 185, 185);
     font-size: 70px;
     text-align: center;
+    border: 0px;
+    cursor: pointer;
 }
 
 .bottom {
