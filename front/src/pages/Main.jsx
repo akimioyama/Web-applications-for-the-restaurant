@@ -38,7 +38,7 @@ function Main() {
           <SS openInfo={openInfo}>9</SS>
         </div>
       </div>
-      <MyModal active={modalActive} setActive={setModalActive} />
+      
     </div>
   );
 }
