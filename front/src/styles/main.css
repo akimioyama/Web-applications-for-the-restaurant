@@ -87,3 +87,30 @@ header {
     height: 340px;
     display: flex;
 }
+.SingIn {
+    margin: 15px;
+    font-size: 30px;
+    display: flex;
+}
+.signin_left, .signin_rigth{
+    margin: 5px;
+}
+.signin_rigth input{
+    font-size: 30px;
+}
+.signin_btn {
+    margin-left: 20px;
+}
+.btn {
+    font-size: 20px;
+    background-color: transparent;
+    padding: 5px 20px 5px 20px;
+    border: 1px solid teal;
+    color: teal;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+.btn:hover{
+    background-color: teal;
+    color: white;
+}
