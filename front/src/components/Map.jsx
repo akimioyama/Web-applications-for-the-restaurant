@@ -1,39 +1,57 @@
-import React, { useState } from "react";
-import { SS } from "./UI/SS/SS"
+import React, { useEffect, useState } from "react";
+import { SS } from "./UI/SS/SS";
 
-const Map = () => {
+const Map = ({info, ...props}) => {
 
-    function openInfo(newQ) {
-        setModalActive(true)
-      }
-      const [modalActive, setModalActive] = useState(false)
+  function openInfo(newQ) {
+    setModalActive(true);
+  }
+  const [modalActive, setModalActive] = useState(false);
+  const [ss, setSS] = useState([])
 
+  useEffect(() => {
+    if(info[0]?.isFree != undefined){
+      setSS(info)
+    }
+  }, [info])
 
   return (
-    <div class="map">
-      <div class="up">
-        <div class="q"></div>
-        <div class="b"></div>
-        <div class="w"></div>
-        <SS openInfo={openInfo}>1</SS>
-        <div class="w"></div>
-        <SS openInfo={openInfo}>2</SS>
-        <div class="w"></div>
-        <SS openInfo={openInfo}>3</SS>
-        <div class="w"></div>
-        <SS openInfo={openInfo}>4</SS>
-        <div class="w"></div>
-        <SS openInfo={openInfo}>5</SS>
+    <div className="map">
+      <div className="up">
+        <div className="q"></div>
+        <div className="b"></div>
+        <div className="w"></div>
+        <SS openInfo={openInfo} table={ss[0]}>
+          {info[0]?.id}
+        </SS>
+        <div className="ww"></div>
+        <SS openInfo={openInfo} table={ss[1]}>
+          {info[1]?.id}
+        </SS>
+        <div className="ww"></div>
+        <SS openInfo={openInfo} table={ss[2]}>
+          {info[2]?.id}
+        </SS>
+        <div className="w"></div>
       </div>
-      <div class="bottom">
-        <div class="w"></div>
-        <SS openInfo={openInfo}>6</SS>
-        <div class="w"></div>
-        <SS openInfo={openInfo}>7</SS>
-        <div class="w"></div>
-        <SS openInfo={openInfo}>8</SS>
-        <div class="w"></div>
-        <SS openInfo={openInfo}>9</SS>
+      <div className="bottom">
+        <div className="w"></div>
+        <SS openInfo={openInfo} table={ss[3]}>
+          {info[3]?.id}
+        </SS>
+        <div className="ww"></div>
+        <SS openInfo={openInfo} table={ss[4]}>
+          {info[4]?.id}
+        </SS>
+        <div className="ww"></div>
+        <SS openInfo={openInfo} table={ss[5]}>
+          {info[5]?.id}
+        </SS>
+        <div className="ww"></div>
+        <SS openInfo={openInfo} table={ss[6]}>
+          {info[6]?.id}
+        </SS>
+        <div className="w"></div>
       </div>
     </div>
   );

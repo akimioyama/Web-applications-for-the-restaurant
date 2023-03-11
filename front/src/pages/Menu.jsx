@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { SingIn } from "../components/login/SingIn";
 import { useCookies } from "react-cookie";
+import { MenuList } from "../components/MenuList";
 
 function Menu() {
 
@@ -16,7 +17,8 @@ function Menu() {
 
     return (
       <div>
-        {role ? <h1>q</h1> : <SingIn />}
+        {role ? <MenuList /> : <SingIn />}
+        
       </div>
     );
   }

@@ -1,7 +1,12 @@
 import React from "react";
 
-const SingIn = () => {
-  const login = () => {};
+const SingIn = ({take}) => {
+  const login = () => {
+    const api = ""
+
+
+    
+  };
 
   return (
     <div>
