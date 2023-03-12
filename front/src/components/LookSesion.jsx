@@ -5,6 +5,7 @@ import { Sesion } from "./Sesion";
 const LookSesion = ({ info }) => {
   const [look, setLook] = useState(false);
   const [newPost, setNewPost] = useState([])
+  const [price, setPrice] = useState("")
 
   const qwe = () => {
     
@@ -35,15 +36,26 @@ const LookSesion = ({ info }) => {
       window.location.reload();
     })
   }
+  const uuu = () => {
+    let api = "https://localhost:44343/api/Sessions/GetCheck?id=" + info.session.id
+    console.log(info.session.id)
+    axios.get(api).then(function (response){
+      setPrice(response.data)
+    })
+  }
 
   return (
     <div className="LookSession">
       <div>Текущая сессия</div>
+      {price == "" ? "" : <div>Сумма {price}</div>}
       <button className="btn btn-mini" onClick={qwe}>
         Показать
       </button>
       <button className="btn btn-mini" onClick={asd}>
         Скрыть
+      </button>
+      <button className="btn btn-red btn-mini" onClick={uuu}>
+        Итог
       </button>
       <button className="btn btn-red btn-mini" onClick={zxc}>
         Расчитать

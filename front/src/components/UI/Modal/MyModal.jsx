@@ -31,7 +31,7 @@ const MyModal = ({ active, setActive, text }) => {
   const [date, setDate] = useState("");
   const Booking = () => {
     const api = "https://localhost:44343/api/Booking";
-    let datetime = date.replace(" ", "T")
+    let datetime = date.replace(" ", "T");
     const conf = {
       id: 0,
       tableId: text.id,
@@ -40,30 +40,37 @@ const MyModal = ({ active, setActive, text }) => {
       phone: telepon,
     };
     axios.post(api, conf).then(function (response) {
-        // window.location.reload();
-    })
+      // window.location.reload();
+    });
   };
   const handleInputDate = (e) => {
-    setDate(e.target.value)
-  }
+    setDate(e.target.value);
+  };
   const handleInputName = (e) => {
-    setName(e.target.value)
-  }
+    setName(e.target.value);
+  };
   const handleInputTelopon = (e) => {
-    setTelepon(e.target.value)
-  }
+    setTelepon(e.target.value);
+  };
 
-  const [allBooking, setAllBooking] = useState([])
+  const [allBooking, setAllBooking] = useState([]);
   const getAll = () => {
-    const api = "https://localhost:44343/api/Booking?TableId=" + text.id
+    const api = "https://localhost:44343/api/Booking?TableId=" + text.id;
     axios.get(api).then(function (response) {
-        console.log(response.data)
-        setAllBooking(response.data)
-    })
-  }
+      console.log(response.data);
+      setAllBooking(response.data);
+    });
+  };
   const close = () => {
-    setAllBooking([])
-  }
+    setAllBooking([]);
+  };
+  const newSession = () => {
+    console.log(text.id);
+    let api = "https://localhost:44343/api/Sessions?tableId=" + text.id;
+    axios.post(api).then(function (response) {
+      window.location.reload();
+    });
+  };
 
   return (
     <div
@@ -84,7 +91,14 @@ const MyModal = ({ active, setActive, text }) => {
             </button>
           </div>
           <br />
-          {text?.isFree == false ? <LookSesion info={text} /> : ""}
+          {text?.session != null ? <LookSesion info={text} /> : ""}
+          {text?.session == null ? (
+            <button className="btn btn-mini" onClick={newSession}>
+              Посадить
+            </button>
+          ) : (
+            ""
+          )}
           <br />
           <div className="Booking">
             <div className="BookingLeft">
@@ -101,11 +115,7 @@ const MyModal = ({ active, setActive, text }) => {
                 />
               </div>
               <div>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={handleInputName}
-                />
+                <input type="text" value={name} onChange={handleInputName} />
               </div>
               <div>
                 <input
@@ -122,12 +132,15 @@ const MyModal = ({ active, setActive, text }) => {
             </button>
           </div>
           <br />
-          <div>Записи</div> 
-          <button className="btn btn-mini" onClick={getAll}>Показать</button>
+          <div>Записи</div>
+          <button className="btn btn-mini" onClick={getAll}>
+            Показать
+          </button>
 
-          <ItemList posts={allBooking}/>
-          <button className="btn btn-mini" onClick={close}>Скрыть</button>
-
+          <ItemList posts={allBooking} />
+          <button className="btn btn-mini" onClick={close}>
+            Скрыть
+          </button>
         </div>
       </div>
     </div>

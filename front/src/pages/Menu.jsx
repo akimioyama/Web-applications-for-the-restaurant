@@ -11,7 +11,6 @@ function Menu() {
 
     useEffect(() => {
         if(cookies?.role != "user" || cookies?.role != "admin") {
-          setCookie("role", role, { path: "/"})
         }
       },[])
 
