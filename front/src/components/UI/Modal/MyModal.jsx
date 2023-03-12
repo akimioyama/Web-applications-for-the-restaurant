@@ -4,6 +4,8 @@ import "./MYModal.css";
 import axios from "axios";
 import { Item } from "../../Item";
 import { ItemList } from "../../ItemList";
+import { Sesion } from "../../Sesion";
+import { LookSesion } from "../../LookSesion";
 
 const MyModal = ({ active, setActive, text }) => {
   const changeStatus = () => {
@@ -38,7 +40,7 @@ const MyModal = ({ active, setActive, text }) => {
       phone: telepon,
     };
     axios.post(api, conf).then(function (response) {
-        window.location.reload();
+        // window.location.reload();
     })
   };
   const handleInputDate = (e) => {
@@ -77,10 +79,12 @@ const MyModal = ({ active, setActive, text }) => {
           <div>Столки сейчас: {text.isFree == true ? "свободен" : "занят"}</div>
           <div>
             <label>Сменить статус </label>
-            <button className="btn" onClick={changeStatus}>
+            <button className="btn btn-mini" onClick={changeStatus}>
               Сменить статус
             </button>
           </div>
+          <br />
+          {text?.isFree == false ? <LookSesion info={text} /> : ""}
           <br />
           <div className="Booking">
             <div className="BookingLeft">
@@ -120,9 +124,10 @@ const MyModal = ({ active, setActive, text }) => {
           <br />
           <div>Записи</div> 
           <button className="btn btn-mini" onClick={getAll}>Показать</button>
-          <button className="btn btn-mini" onClick={close}>Скрыть</button>
 
           <ItemList posts={allBooking}/>
+          <button className="btn btn-mini" onClick={close}>Скрыть</button>
+
         </div>
       </div>
     </div>

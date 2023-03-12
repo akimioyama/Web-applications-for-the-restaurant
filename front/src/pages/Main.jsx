@@ -20,6 +20,7 @@ function Main() {
 
     const api = "https://localhost:44343/api/Tables"
     axios.get(api).then( function (respons) {
+      console.log(respons.data)
       setTable(respons.data)
     })
 
