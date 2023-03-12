@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
 }
+
 header {
     min-height: 50px;
     width: 100%;
@@ -120,6 +121,10 @@ header {
     margin: 15px;
     font-size: 30px;
     display: flex;
+    margin-top: 100px;
+}
+.outin {
+    margin: 15px;
 }
 .signin_left, .signin_rigth{
     margin: 5px;
@@ -247,4 +252,58 @@ header {
 }
 .OrderItem_item_btn_mm {
     width: 8%;
+}
+.MainMenu {
+    margin-top: 60px;
+    margin-left: 50px;
+    margin-right: 50px;
+    font-size: 25px;
+}
+.MainMenuItem {
+    width: 100%;
+    border: 1px solid teal;
+    padding: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+.MainMenuItem_footer {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+}
+.MainMenuItem_footer_lf {
+    width: 80%;
+    text-align: left;
+}
+.MainMenuItem_footer_rg {
+    width: 20%;
+    text-align: center;
+}
+.lplp {
+    color: rebeccapurple;
+}
+.jiji button {
+    margin-left: 5px;
+}
+.AddFood {
+    width: 50%;
+    border: 1px solid teal;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    display: flex;
+    padding: 10px;
+}
+.AddFood_lf {
+    width: 25%;
+}
+.AddFood_rg {
+    width: 75%;
+}
+.AddFood_rg input {
+    width: 100%;
+    font-size: 25px
+}
+.changeFood {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

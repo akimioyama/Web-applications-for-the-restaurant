@@ -1,26 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { SingIn } from "../components/login/SingIn";
 import { useCookies } from "react-cookie";
-import { MenuList } from "../components/MenuList";
+import { MainMenu } from "../components/MainMenu";
 
 function Menu() {
+  const [token, setToken] = useState();
+  const [role, setRole] = useState("user");
+  const [cookies, setCookie, removeCookie] = useCookies(["role"]);
 
-    const [token, setToken] = useState()
-    const [role, setRole] = useState("user")
-    const [cookies, setCookie, removeCookie] = useCookies(["role"])
-
-    useEffect(() => {
-        if(cookies?.role != "user" || cookies?.role != "admin") {
-        }
-      },[])
-
-    return (
-      <div>
-        {role ? <MenuList /> : <SingIn />}
-        
-      </div>
-    );
+  useEffect(() => {
+    if (cookies?.role != "user" || cookies?.role != "admin") {
+    }
+  }, []);
+  const remove = () => {
+    removeCookie("role")
+    removeCookie("jwtToken")
   }
-  
-  export { Menu };
-  
+
+  return (
+    <div>
+      {cookies.role == "user" || cookies.role == "admin" ? (
+        <MainMenu />
+      ) : (
+        <SingIn />
+      )}
+      {cookies.role == "user" || cookies.role == "admin" ? (
+        <div className="outin">
+        <button className="btn" onClick={remove}>Выйти</button>
+      </div>
+      ) : ""}
+    </div>
+  );
+}
+
+export { Menu };
