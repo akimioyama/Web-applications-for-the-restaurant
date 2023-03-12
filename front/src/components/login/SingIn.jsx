@@ -1,11 +1,26 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useCookies } from "react-cookie";
 
-const SingIn = ({take}) => {
+const SingIn = ({ take }) => {
+  const [token, setToken] = useState("");
+  const [cookies, setCookie, removeCookie] = useCookies(["jwtToken", "role"]);
+
   const login = () => {
-    const api = ""
+    let api = "https://localhost:44343/api/Account/Login";
 
+    let el1 = document.getElementById("001").value;
+    let el2 = document.getElementById("002").value;
 
-    
+    let conf = {
+      login: el1,
+      password: el2,
+    };
+    axios.post(api, conf).then(function (respons) {
+      setCookie("jwtToken", respons.data.jwtToken, { path: "/" });
+      setCookie("role", respons.data.role, { path: "/" });
+      window.location.reload();
+    });
   };
 
   return (
@@ -17,10 +32,10 @@ const SingIn = ({take}) => {
         </div>
         <div className="signin_rigth">
           <div>
-            <input type="text" />
+            <input type="text" id="001" />
           </div>
           <div>
-            <input type="password" name="" id="" />
+            <input type="password" name="" id="002" />
           </div>
         </div>
       </div>

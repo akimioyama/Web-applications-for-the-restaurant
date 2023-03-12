@@ -15,11 +15,18 @@ function Main() {
 
   useEffect( () => {
     if(cookies?.role != "user" || cookies?.role != "admin") {
-      setCookie("role", role, { path: "/"})
+      
     }
 
     const api = "https://localhost:44343/api/Tables"
-    axios.get(api).then( function (respons) {
+    let jwt = cookies?.jwtToken;
+    let config = {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + jwt,
+      }
+    }
+    axios.get(api, config).then( function (respons) {
       console.log(respons.data)
       setTable(respons.data)
     })
@@ -32,7 +39,7 @@ function Main() {
 
   return (
     <div className="main">
-      {cookies.role == "user" ? <Map info={table}/> : <SingIn take={takeToken} />}
+      {cookies.role == "user" || cookies.role  == "admin" ? <Map info={table}/> : <SingIn take={takeToken} />}
     </div>
   );
 }

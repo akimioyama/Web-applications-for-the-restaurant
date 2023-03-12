@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
+
 
 const Item = ({ post }) => {
   const [name, setName] = useState("");
   const [telepon, setTelepon] = useState("");
   const [date, setDate] = useState("");
   const [table, setTable] = useState("");
+  const [cookies, setCookie, removeCookie] = useCookies(["role"])
+
 
   const dateChange = (e) => {
     setDate(e.target.value);
@@ -42,13 +46,28 @@ const Item = ({ post }) => {
       fio: newname,
       phone: newtel,
     };
-    axios.put(api, conf).then(function (respones) {
-      window.location.reload();
+    let jwt = cookies?.jwtToken;
+    let config = {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + jwt,
+      }
+    }
+    axios.put(api, conf, config).then(function (respones) {
+      // window.location.reload();
     });
+    // console.log(conf)
   };
   const delBook = () => {
+    let jwt = cookies?.jwtToken;
+    let config = {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + jwt,
+      }
+    }
     const api = "https://localhost:44343/api/Booking?id=" + post.id;
-    axios.delete(api).then(function (respones) {
+    axios.delete(api, config).then(function (respones) {
       window.location.reload();
     });
   };

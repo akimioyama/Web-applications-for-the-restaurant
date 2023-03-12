@@ -8,8 +8,6 @@ const Sesion = ({ sesion, change, table }) => {
 
   const qwe = () => {
     console.log(sesion);
-    setNewPost()
-    change(newPost)
     setDish(true)
   };
 
@@ -24,6 +22,11 @@ const Sesion = ({ sesion, change, table }) => {
     setPost(sesion.orders)
   }, [dish])
 
+
+  useEffect(() => {
+    setPost(sesion.orders)
+  }, [sesion])
+
   const changeOrder = (newList) => {
     change(newList)
   }
@@ -37,7 +40,7 @@ const Sesion = ({ sesion, change, table }) => {
       <div>
         <button className="btn btn-mini" onClick={qwe}>Посмотеть меню</button>
         <button className="btn btn-mini" onClick={asd}>Скрыть меню</button>
-        {dish == true ? <MenuOrList sessionId={sesion}/> : ""}
+        {dish == true ? <MenuOrList change={changeOrder} sessionId={sesion} table={table}/> : ""}
       </div>
     </div>
   );

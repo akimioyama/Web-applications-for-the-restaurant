@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import classes from "./MyModal.module.css";
 import "./MYModal.css";
 import axios from "axios";
-import { Item } from "../../Item";
 import { ItemList } from "../../ItemList";
-import { Sesion } from "../../Sesion";
 import { LookSesion } from "../../LookSesion";
+import { useCookies } from "react-cookie";
+
 
 const MyModal = ({ active, setActive, text }) => {
+  const [cookies, setCookie, removeCookie] = useCookies(["role"])
+
   const changeStatus = () => {
     let status;
     if (text.isFree == true) {
@@ -16,12 +18,19 @@ const MyModal = ({ active, setActive, text }) => {
       status = true;
     }
     const api = "https://localhost:44343/api/Tables";
+    let jwt = cookies?.jwtToken;
+    let config = {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + jwt,
+      }
+    }
     const conf = {
       id: text.id,
       isFree: status,
     };
 
-    axios.put(api, conf).then(function (response) {
+    axios.put(api, conf, config).then(function (response) {
       window.location.reload();
     });
   };
@@ -39,8 +48,17 @@ const MyModal = ({ active, setActive, text }) => {
       fio: name,
       phone: telepon,
     };
-    axios.post(api, conf).then(function (response) {
-      // window.location.reload();
+    let jwt = cookies?.jwtToken;
+    let config = {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + jwt,
+      }
+    }
+    axios.post(api, conf, config).then(function (response) {
+      setDate("")
+      setTelepon("")
+      setName("")
     });
   };
   const handleInputDate = (e) => {
@@ -56,7 +74,14 @@ const MyModal = ({ active, setActive, text }) => {
   const [allBooking, setAllBooking] = useState([]);
   const getAll = () => {
     const api = "https://localhost:44343/api/Booking?TableId=" + text.id;
-    axios.get(api).then(function (response) {
+    let jwt = cookies?.jwtToken;
+    let config = {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + jwt,
+      }
+    }
+    axios.get(api, config).then(function (response) {
       console.log(response.data);
       setAllBooking(response.data);
     });
@@ -66,8 +91,16 @@ const MyModal = ({ active, setActive, text }) => {
   };
   const newSession = () => {
     console.log(text.id);
-    let api = "https://localhost:44343/api/Sessions?tableId=" + text.id;
-    axios.post(api).then(function (response) {
+    let jwt = cookies?.jwtToken;
+
+    let config = {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + jwt,
+      }
+    }
+    let api = "https://localhost:44343/api/Sessions/" + text.id;
+    axios.get(api, config).then(function (response) {
       window.location.reload();
     });
   };

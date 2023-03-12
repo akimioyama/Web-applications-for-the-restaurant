@@ -1,24 +1,27 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
+
 
 const OrderItem = ({ info, sessionId, change,table }) => {
 
     const [newListOrder, setnewListOrder] = useState([])
+    const [cookies, setCookie, removeCookie] = useCookies(["role"])
+
 
   const deletOrder = () => {
+    let jwt = cookies?.jwtToken;
+    let config = {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + jwt,
+      }
+    }
     console.log(info.id);
-
-    // let apii = "https://localhost:44343/api/Sessions?tableId=" + table;
-    //   axios.get(apii).then(function (response) {
-    //     setnewListOrder(response.data)
-    //     change(response.data.orders)
-    //     console.log(response.data.orders)
-    //   });
-
     let api = "https://localhost:44343/api/Orders?orderId=" + info.id;
-    axios.delete(api).then(function () {
+    axios.delete(api, config).then(function () {
       let apii = "https://localhost:44343/api/Sessions?tableId=" + table;
-      axios.get(apii).then(function (response) {
+      axios.get(apii, config).then(function (response) {
         setnewListOrder(response.data)
         let newR = response.data.orders
         change(newR)
