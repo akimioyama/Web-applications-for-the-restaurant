@@ -47,7 +47,7 @@ header {
     min-height: 800px;
 }
 .map {
-    margin-top: 70px;
+    margin-top: 95px;
     width: 90%;
     position: absolute;
     left: 50%;
@@ -306,4 +306,20 @@ header {
 .changeFood {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+.acc {
+    margin: 50px;
+    font-size: 22px;
+}
+.accItem {
+    border: 1px solid teal;
+    margin-top: 5px;
+    padding: 5px;
+}
+.accItem_n {
+    display: flex;
+    margin: 5px;
+}
+.accItem_fio {
+    margin-left: 10px;
 }

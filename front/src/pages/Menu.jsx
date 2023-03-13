@@ -13,22 +13,38 @@ function Menu() {
     }
   }, []);
   const remove = () => {
-    removeCookie("role")
-    removeCookie("jwtToken")
-  }
+    removeCookie("role");
+    removeCookie("jwtToken");
+  };
+  const Acc = () => {
+    let acc = "http://localhost:3000/acc";
+    window.location.href = acc;
+  };
 
   return (
     <div>
+      {cookies.role == "user" || cookies.role == "admin" ? (
+        <div className="outin">
+          <button className="btn btn-red" onClick={remove}>
+            Выйти
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
+      {/* {cookies.role == "admin" ? (
+        <button className="btn" onClick={Acc}>
+          Аккаунты
+        </button>
+      ) : (
+        ""
+      )} */}
       {cookies.role == "user" || cookies.role == "admin" ? (
         <MainMenu />
       ) : (
         <SingIn />
       )}
-      {cookies.role == "user" || cookies.role == "admin" ? (
-        <div className="outin">
-        <button className="btn" onClick={remove}>Выйти</button>
-      </div>
-      ) : ""}
+      
     </div>
   );
 }

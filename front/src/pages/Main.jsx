@@ -30,9 +30,13 @@ function Main() {
 
   const takeToken = (newRole) => {};
   const remove = () => {
-    removeCookie("role")
-    removeCookie("jwtToken")
-  }
+    removeCookie("role");
+    removeCookie("jwtToken");
+  };
+  const Acc = () => {
+    let acc = "http://localhost:3000/acc";
+    window.location.href = acc;
+  };
 
   return (
     <div className="main">
@@ -43,9 +47,22 @@ function Main() {
       )}
       {cookies.role == "user" || cookies.role == "admin" ? (
         <div className="outin">
-        <button className="btn" onClick={remove}>Выйти</button>
-      </div>
-      ) : ""}
+          <button className="btn btn-red" onClick={remove}>
+            Выйти
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
+      {cookies.role == "admin" ? (
+        <div className="outin">
+          <button className="btn" onClick={Acc}>
+            Аккаунты
+          </button>
+        </div>  
+      ) : (
+        ""
+      )}
     </div>
   );
 }
