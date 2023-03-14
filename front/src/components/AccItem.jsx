@@ -128,9 +128,9 @@ const AccItem = ({ item, change, close }) => {
         <button className="btn" onClick={changeAcc}>
           Изменить
         </button>
-        <button className="btn btn-red" onClick={delAcc}>
+        {/* <button className="btn btn-red" onClick={delAcc}>
           Удалить
-        </button>
+        </button> */}
         {look == true ? (
           <div className="changeFood">
             <div className="AddFood_rg">
